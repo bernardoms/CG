@@ -4,36 +4,44 @@
 //https://processing.org/examples/polartocartesian.html
 
 void setup(){
-  size(530,530);
-  int CENTER = height/2;
+  size(400,400);
+  //int CENTER = height/2;
+ 
   stroke(255);
   smooth();
   noFill();
 }
 void draw(){
+  translate(width/2,height/2);
+ 
   strokeWeight(1);
   background(0);
-  ellipse(265,265,525,525);//Creates de Watch circle
+  ellipse(0,0,400,400);//Creates de Watch circle
+  
+  //Draws clock numbers
+  float rText = 180;
+  textAlign(CENTER,CENTER);
+  for(int i = 0; i < 12; i++){
+      String texto = "" + i;
+      if(i == 0){
+           texto = "12";
+      }
+      float angulo = map(i,0,12,0,TWO_PI) - HALF_PI;
+      text(texto,rText*cos(angulo),rText*sin(angulo));
+  }
+  
   //Draws the second hand
-  float theta = TWO_PI * second() / 60.0; // Calculate the current seconds
-  PVector endpoint = convertAndTranslate(theta,250.0); // make the convertion pollar to cartesian so we make the hand rotate inside the watch using the theta for seconds. 
-  line(265,265,endpoint.x,endpoint.y); // draw the line
+  float thetas = map(second(),0,60,0,TWO_PI) - HALF_PI;
+  line(0,0,cos(thetas) * 150 , sin(thetas) * 150); // draw the line
+  
   //Draws the minute hand
   strokeWeight(2);
-  theta = TWO_PI * minute() /60.0;
-  endpoint = convertAndTranslate(theta,150.0); 
-  line(265,265,endpoint.x,endpoint.y); // draw the line
+  float thetam = map(minute(),0,60,0,TWO_PI) - HALF_PI;
+  line(0,0,cos(thetam) * 150 , sin(thetam) * 150); // draw the line
   
   //Draws the hour hand
   strokeWeight(4);
   //the hour function returns the time in 23 format so we need to convert to 12 format
-  theta = TWO_PI * ((hour() %12 + minute() /60.0)/12.0);
-  endpoint = convertAndTranslate(theta,50.0); 
-  line(265,265,endpoint.x,endpoint.y); // draw the line
-}
-
-//Convert polar to carteasian
-PVector convertAndTranslate(float theta, float r){
-  theta -= HALF_PI;
-  return new PVector(r*cos(theta) * 265, r*sin(theta) * 265);
+  float thetah = map((hour() + minute()/60.0) ,0,24,0,2 * TWO_PI ) - HALF_PI;
+  line(0,0,cos(thetah) * 150 , sin(thetah) * 150); // draw the line
 }
