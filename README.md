@@ -1,2 +1,2 @@
 # CG
-This is a CG repository where you can find processing examples 
+This is a Computer Graphics Repository with some examples using PyOpengl and Glut
