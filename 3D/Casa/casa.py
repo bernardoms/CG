@@ -23,7 +23,7 @@ dz = 0
  
 def LoadTextures():
     global texture
-    texture = glGenTextures(4)
+    texture = glGenTextures(5)
     ################################################################################
     glBindTexture(GL_TEXTURE_2D, texture[0])
     #img = Image.open('atras.png')
@@ -126,6 +126,32 @@ def LoadTextures():
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
+	
+	################################################################################
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    #img = Image.open('frente.png')
+    reader = png.Reader(filename='partesCasa.png')
+    w, h, pixels, metadata = reader.read_flat()
+
+    #w, h = img.size[0], img.size[1]
+    #print w, h
+    #pixels = img.getdata()
+    # pixels = [pixels[i * w:(i + 1) * w] for i in xrange(h)]
+    #img_data = numpy.array(list(img.getdata()), numpy.uint8)
+    if(metadata['alpha']):
+		modo = GL_RGBA
+    else:
+        modo = GL_RGB
+    glPixelStorei(GL_UNPACK_ALIGNMENT,1)
+    glTexImage2D(GL_TEXTURE_2D, 0, modo, w, h, 0, modo, GL_UNSIGNED_BYTE, pixels.tolist())
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL)
+	
 def InitGL(Width, Height):             
     LoadTextures()
     glEnable(GL_TEXTURE_2D)
@@ -171,10 +197,37 @@ def DrawGLScene():
     glTexCoord2f(0.11, -0.12); glVertex3f(-1.0, -1.0,  1.0)    
     glTexCoord2f(0.49, -0.12);glVertex3f( 1.0, -1.0,  1.0) 
     glTexCoord2f(0.49, -0.6); glVertex3f( 1.0,  1.0,  1.0)   
-    glTexCoord2f(0.11, -0.6);glVertex3f(-1.0,  1.0,  1.0)  
-    glEnd()       	# Done Drawing The Cube
+    glTexCoord2f(0.11, -0.6);glVertex3f(-1.0,  1.0,  1.0) 
+    glEnd()
 	
-    glBindTexture(GL_TEXTURE_2D, texture[0])
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    glBegin(GL_QUADS) 
+    #Janela da frente
+    glTexCoord2f(0.46, -0.14);glVertex3f(-0.30,  -0.52,  1.01) 
+    glTexCoord2f(0.40, -0.14);glVertex3f(-0.65,  -0.52,  1.01)
+    glTexCoord2f(0.40, -0.33);glVertex3f(-0.65,  0.20,  1.01) 	
+    glTexCoord2f(0.46, -0.33);glVertex3f(-0.30,  0.20,  1.01)
+    glEnd()
+	
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    glBegin(GL_QUADS) 
+    #Porta
+    glTexCoord2f(0.86, -0.10);glVertex3f(0.25,  -1.00,  1.01) 
+    glTexCoord2f(0.95, -0.10);glVertex3f(0.78,  -1.00,  1.01)
+    glTexCoord2f(0.95, -0.41);glVertex3f(0.78,  0.20,  1.01) 	
+    glTexCoord2f(0.86, -0.41);glVertex3f(0.25,  0.20,  1.01)
+    glEnd()
+	
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+	#Janelinha da frente
+    glBegin(GL_QUADS) 
+    glTexCoord2f(0.31, -0.19);glVertex3f(-0.15,  1.2,  1.01) 
+    glTexCoord2f(0.28, -0.19);glVertex3f(0.10,  1.2,  1.01)
+    glTexCoord2f(0.28, -0.27);glVertex3f(0.10,  1.6,  1.01) 	
+    glTexCoord2f(0.31, -0.27);glVertex3f(-0.15,  1.6,  1.01)
+    glEnd()
+	
+    glBindTexture(GL_TEXTURE_2D, texture[1])
     glBegin(GL_QUADS)
 	# Lateral da casa(Direita)
     glTexCoord2f(-0.09, -0.13); glVertex3f( 1.0, -1.0, -1.0)    
@@ -182,6 +235,15 @@ def DrawGLScene():
     glTexCoord2f(-0.49, -0.6); glVertex3f( 1.0,  1.0,  1.0)    
     glTexCoord2f(-0.49, -0.13); glVertex3f( 1.0, -1.0,  1.0)  
     glEnd()
+	
+    #glBindTexture(GL_TEXTURE_2D, texture[4])
+    #glBegin(GL_QUADS) 
+    #Janela da lateral direita da casa
+    #glTexCoord2f(0.46, -0.14);glVertex3f(-0.30,  -0.52,  -1.25) 
+    #glTexCoord2f(0.40, -0.14);glVertex3f(0.85,  -0.52,  1.0)
+    #glTexCoord2f(0.40, -0.33);glVertex3f(0.85,  0.50,  1.0) 	
+    #glTexCoord2f(0.46, -0.33);glVertex3f(-0.30,  0.90,  -1.25)
+    #glEnd()
 	
     glBindTexture(GL_TEXTURE_2D, texture[1])
 	#Telhado da casa(Frente)
