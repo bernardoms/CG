@@ -236,14 +236,14 @@ def DrawGLScene():
     glTexCoord2f(-0.49, -0.13); glVertex3f( 1.0, -1.0,  1.0)  
     glEnd()
 	
-    #glBindTexture(GL_TEXTURE_2D, texture[4])
-    #glBegin(GL_QUADS) 
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    glBegin(GL_QUADS) 
     #Janela da lateral direita da casa
-    #glTexCoord2f(0.46, -0.14);glVertex3f(-0.30,  -0.52,  -1.25) 
-    #glTexCoord2f(0.40, -0.14);glVertex3f(0.85,  -0.52,  1.0)
-    #glTexCoord2f(0.40, -0.33);glVertex3f(0.85,  0.50,  1.0) 	
-    #glTexCoord2f(0.46, -0.33);glVertex3f(-0.30,  0.90,  -1.25)
-    #glEnd()
+    glTexCoord2f(0.47, -0.14);glVertex3f(1.01,  -0.57,  -0.15) 
+    glTexCoord2f(0.40, -0.14);glVertex3f(1.01,  -0.57,  0.32)
+    glTexCoord2f(0.40, -0.33);glVertex3f(1.01,  0.20,  0.32) 	
+    glTexCoord2f(0.47, -0.33);glVertex3f(1.01,  0.20,  -0.15)
+    glEnd()
 	
     glBindTexture(GL_TEXTURE_2D, texture[1])
 	#Telhado da casa(Frente)
@@ -269,6 +269,15 @@ def DrawGLScene():
     glTexCoord2f(0.49, -0.6); glVertex3f( 1.0,  1.0, -1.0)    
     glTexCoord2f(0.49, -0.13); glVertex3f( 1.0, -1.0, -1.0)   
     glEnd() 
+	
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    glBegin(GL_QUADS) 
+    #Janela de traz da casa
+    glTexCoord2f(0.46, -0.14);glVertex3f(-0.30,  -0.54,  -1.01) 
+    glTexCoord2f(0.40, -0.14);glVertex3f(-0.65,  -0.54,  -1.01)
+    glTexCoord2f(0.40, -0.33);glVertex3f(-0.65,  0.20,  -1.01) 	
+    glTexCoord2f(0.46, -0.33);glVertex3f(-0.30,  0.20,  -1.01)
+    glEnd()
 	
     glBindTexture(GL_TEXTURE_2D, texture[2])
 	#Telhado(lados esquerdo)
@@ -296,6 +305,16 @@ def DrawGLScene():
     glTexCoord2f(-0.49, -0.6); glVertex3f(-1.0,  1.0,  1.0)   
     glTexCoord2f(-0.12, -0.6); glVertex3f(-1.0,  1.0, -1.0)   
     glEnd()
+	
+    glBindTexture(GL_TEXTURE_2D, texture[4])
+    glBegin(GL_QUADS) 
+    #Janela da lateral esquerda da casa
+    glTexCoord2f(0.46, -0.14);glVertex3f(-1.01,  -0.57,  -0.15) 
+    glTexCoord2f(0.40, -0.14);glVertex3f(-1.01,  -0.57,  0.32)
+    glTexCoord2f(0.40, -0.33);glVertex3f(-1.01,  0.20,  0.32) 	
+    glTexCoord2f(0.46, -0.33);glVertex3f(-1.01,  0.20,  -0.15)
+    glEnd()
+	
 	
     glBindTexture(GL_TEXTURE_2D, texture[3])
 	#Jardim/chao casa
